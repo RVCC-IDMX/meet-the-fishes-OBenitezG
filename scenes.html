@@ -101,7 +101,7 @@
 
         The easiest, ugliest way to swap between scenes, would be to assign some code to each button to pull the current scene off the stage and replace it with another.
 
-    * /
+    */
 
     //
     // Swapping between scenes
@@ -123,7 +123,7 @@
 
         It would be better if we could build in a nice fade transition, though, right?
 
-    * /
+    */
 
     nextButton.onclick = async () => {
         //Fade out current scene
@@ -159,7 +159,7 @@
 
         Or how about a swipe transition?
 
-    * /
+    */
 
     nextButton.onclick = async () => {
         //Set up next scene on the right
@@ -207,7 +207,7 @@
 
         Let's create a system for scene management.
 
-    * /
+    */
 
     //Let's call it the Director. It calls the shots.
     var Director = {
@@ -239,7 +239,7 @@
 
             if (params == undefined) params = {};
 
-            let currentScene = Director.scene[Director.currentScene];
+            let currentScene = Director.scene[Director.currentScene],
                 nextScene    = Director.scene[nextSceneName];
 
             if (params.transition == undefined)

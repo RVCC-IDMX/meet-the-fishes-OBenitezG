@@ -29,8 +29,8 @@ var UI = {
             ourButton.y = y;
 
         var buttonBody = new PIXI.Graphics();
-            buttonBody.beginFill(params.backgroundColor);
-            buttonBody.drawRect(0, 0, 200, 100);
+            buttonBody.rect(0, 0, 200, 100);
+            buttonBody.fill(params.backgroundColor);
             ourButton.addChild(buttonBody);
 
             ourButton.body = buttonBody;
