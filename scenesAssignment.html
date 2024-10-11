@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene Assignment</title>
+
+    <script src="https://pixijs.download/release/pixi.js"></script>
+    <script src="js/bezier.js"></script>
+    <script src="js/animate.js"></script>
+    <script src="js/ui_elements.js"></script>
+
+</head>
+<body>
+    <script type="module">
+    
+        //The App
+        var app = new PIXI.Application()
+        await app.init({
+            width:640,
+            height:480,
+            backgroundColor: 0x000000
+        })
+        var stage = app.stage
+        var view = app.canvas
+    
+        //Add view to the document
+        document.body.appendChild(app.view)
+
+    </script>
+    
+</body>
+</html>
