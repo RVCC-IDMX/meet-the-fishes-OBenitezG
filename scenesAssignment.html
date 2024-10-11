@@ -23,9 +23,73 @@
         })
         var stage = app.stage
         var view = app.canvas
+
+        //Image Load
+        await PIXI.Assets.load('img/Crab.png')
     
         //Add view to the document
         document.body.appendChild(app.view)
+
+        //Surface and UI
+        let surface = new PIXI.Container()
+
+        let surfaceButton = UI.Button(0,0,"Dive V")
+            surfaceButton.x = app.view.width  - surfaceButton.width
+            surfaceButton.y = app.view.height - surfaceButton.height
+
+        surface.addChild(surfaceButton)
+
+        let surfaceText = new PIXI.Text("Surface",{fill:0xFFFFFF})
+
+        //Surface Fish and Animation
+        let crab = PIXI.Sprite.from('img/Crab.png')
+            crab.y = 300
+
+        async function crabloop() {
+            await Animate.to(crab, {
+                x : 550,
+                y : 300,
+                easing : Animate.easeInOut,
+                duration : 5000
+            })
+            await Animate.to(crab, {
+                x : 0,
+                y : 300,
+                easing : Animate.easeInOut,
+                duration : 5000
+            })
+
+            crabloop()
+
+        }
+
+        crabloop()
+
+        app.canvas.addEventListener("mousedown", async(event) => {
+        let mouse_pos_x = event.clientX
+        let mouse_pos_y = event.clientY
+
+        Animate.stop(crab)
+
+        await Animate.to(crab, {
+            x : mouse_pos_x,
+            y : mouse_pos_y,
+            easing : Animate.easeOut,
+            duration : 200
+        })
+
+        crabloop()
+        })
+
+
+        surface.addChild(crab)
+
+        surface.addChild(surfaceText)
+
+
+
+
+        app.stage.addChild(surface)
 
     </script>
     
