@@ -78,11 +78,26 @@ var Director = {
         if (params.duration == undefined) params.duration = 500;
 
         let star_graphic = new PIXI.Graphics()
-            star_graphic.star(currentScene.width/2, currentScene.height/, 5, 50)
+            star_graphic.star(currentScene.width/2, currentScene.height/2, 5, 50)
             star_graphic.fill(0xFFFFFF)
-            star_graphic.stroke({ width: 2, color: 0x000000 })
 
-        currentScene.addChild(star_graphic)
+        app.stage.addChild(star_graphic)
+
+        await Animate.to(star_graphic, {
+            x :300,
+            duration : 1000
+        })
+
+        // await Animate.to(star_graphic, {
+        //     scale: {
+        //         x: 100,
+        //         y : 100
+        //     }
+        // })
+
+        app.stage.removeChild(star_graphic)
+        app.stage.removeChild(currentScene)
+        app.stage.addChild(nextScene);
     },
 
     //Slide in a particular direction
