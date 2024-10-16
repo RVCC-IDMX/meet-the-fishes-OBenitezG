@@ -71,6 +71,20 @@ var Director = {
         currentScene.alpha = 1;
     },
 
+    star : async (currentScene,nextScene,params) => {
+
+        //Check duration
+        if (params == undefined) params = {};
+        if (params.duration == undefined) params.duration = 500;
+
+        let star_graphic = new PIXI.Graphics()
+            star_graphic.star(currentScene.width/2, currentScene.height/, 5, 50)
+            star_graphic.fill(0xFFFFFF)
+            star_graphic.stroke({ width: 2, color: 0x000000 })
+
+        currentScene.addChild(star_graphic)
+    },
+
     //Slide in a particular direction
     swipe : async (currentScene,nextScene,params) => {
 
