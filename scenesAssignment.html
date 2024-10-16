@@ -9,6 +9,7 @@
     <script src="js/bezier.js"></script>
     <script src="js/animate.js"></script>
     <script src="js/ui_elements.js"></script>
+    <script src="js/director.js"></script>
 
 </head>
 <body>
@@ -40,6 +41,8 @@
         surface.addChild(surfaceButton)
 
         let surfaceText = new PIXI.Text("Surface",{fill:0xFFFFFF})
+
+        surface.addChild(surfaceText)
 
         //Surface Fish and Animation
         let crab = PIXI.Sprite.from('img/Crab.png')
@@ -84,12 +87,66 @@
 
         surface.addChild(crab)
 
-        surface.addChild(surfaceText)
-
-
-
 
         app.stage.addChild(surface)
+
+        //Stage 2
+        let depths = new PIXI.Container()
+
+        let depthsBackButton = UI.Button(0,0, "Ascend ^")
+            depthsBackButton.x = app.view.width - depthsBackButton.width
+
+        depths.addChild(depthsBackButton)
+
+        let depthsForwardButton = UI.Button(0,0,"Dive V")
+            depthsForwardButton.x = app.view.width  - depthsForwardButton.width
+            depthsForwardButton.y = app.view.height - depthsForwardButton.height
+
+        depths.addChild(depthsForwardButton)
+
+        let depthsText = new PIXI.Text("Depths",{fill:0xFFFFFF})
+
+        depths.addChild(depthsText)
+
+        //Stage 2 Fish
+
+
+
+
+        //Stage 3
+        let floor = new PIXI.Container()
+
+        let floorBackButton = UI.Button(0,0, "Ascend ^")
+            floorBackButton.x = app.view.width - floorBackButton.width
+
+        floor.addChild(floorBackButton)
+
+        let floorText = new PIXI.Text("Sea Floor",{fill:0xFFFFFF})
+
+        floor.addChild(floorText)
+
+
+
+
+        surfaceButton.onclick = () => {
+            app.stage.removeChild(surface);
+            app.stage.addChild(depths);
+        }
+
+        depthsBackButton.onclick = () => {
+            app.stage.removeChild(depths);
+            app.stage.addChild(surface);
+        }
+
+        depthsForwardButton.onclick = () => {
+            app.stage.removeChild(depths);
+            app.stage.addChild(floor);
+        }
+
+        floorBackButton.onclick = () => {
+            app.stage.removeChild(floor);
+            app.stage.addChild(depths);
+        }
 
     </script>
     
