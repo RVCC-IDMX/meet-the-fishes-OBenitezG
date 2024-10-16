@@ -27,6 +27,8 @@
 
         //Image Load
         await PIXI.Assets.load('img/Crab.png')
+        await PIXI.Assets.load('img/GoldFish.png')
+        await PIXI.Assets.load('img/AnglerFish.png')
     
         //Add view to the document
         document.body.appendChild(app.view)
@@ -69,19 +71,19 @@
         crabloop()
 
         app.canvas.addEventListener("mousedown", async(event) => {
-        let mouse_pos_x = event.clientX
-        let mouse_pos_y = event.clientY
+            let mouse_pos_x = event.clientX
+            let mouse_pos_y = event.clientY
 
-        Animate.stop(crab)
+            Animate.stop(crab)
 
-        await Animate.to(crab, {
-            x : mouse_pos_x,
-            y : mouse_pos_y,
-            easing : Animate.easeOut,
-            duration : 200
-        })
+            await Animate.to(crab, {
+                x : mouse_pos_x,
+                y : mouse_pos_y,
+                easing : Animate.easeOut,
+                duration : 200
+            })
 
-        crabloop()
+            crabloop()
         })
 
 
@@ -109,9 +111,38 @@
         depths.addChild(depthsText)
 
         //Stage 2 Fish
+        let clownFish = PIXI.Sprite.from('img/GoldFish.png')
+            clownFish.x = 300
+            clownFish.y = 200
 
 
+        depths.addChild(clownFish)
 
+        async function clownFishLoop() {
+            let color_change = Math.random() * 0xffffff
+
+            await Animate.to(clownFish, {
+                x : 300,
+                y : 150,
+                easing : Animate.easeInOut,
+                duration : 3000
+            })
+
+            await Animate.to(clownFish, {
+                x : 300,
+                y : 250,
+                tint : color_change,
+                easing : Animate.easeInOut,
+                duration : 3000
+            })
+
+            clownFishLoop()
+
+        }
+
+        clownFishLoop()
+
+        //app.stage.addChild(depths)
 
         //Stage 3
         let floor = new PIXI.Container()
@@ -125,7 +156,49 @@
 
         floor.addChild(floorText)
 
+        //Stage 3 Fish
+        let anglerFish = PIXI.Sprite.from('img/AnglerFish.png')
+            anglerFish.anchor.set(0.5)
+            anglerFish.scale.x = 2
+            anglerFish.scale.y = 2
+            anglerFish.x = app.view.width/2
+            anglerFish.y = app.view.height/2
+            anglerFish.alpha = 0
 
+        async function anglerFishloop() {
+            await Animate.to(anglerFish, {
+                scale: {
+                    x : 3,
+                    y : 3
+                },
+                alpha: 1,
+                duration : 5000
+            })
+            await Animate.to(anglerFish, {
+                duration : 2000
+            })
+            await Animate.to(anglerFish, {
+                scale: {
+                    x : 2,
+                    y : 2
+                },
+                alpha: 0,
+                duration : 5000
+            })
+            await Animate.to(anglerFish, {
+                alpha: 0,
+                duration : 5000
+            })
+
+            anglerFishloop()
+
+        }
+
+        anglerFishloop()
+
+        floor.addChild(anglerFish)
+
+        //app.stage.addChild(floor)
 
 
         surfaceButton.onclick = () => {
