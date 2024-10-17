@@ -71,33 +71,44 @@ var Director = {
         currentScene.alpha = 1;
     },
 
-    star : async (currentScene,nextScene,params) => {
+    brush_stroke : async (currentScene,nextScene,params) => {
 
         //Check duration
         if (params == undefined) params = {};
         if (params.duration == undefined) params.duration = 500;
 
-        let star_graphic = new PIXI.Graphics()
-            star_graphic.star(currentScene.width/2, currentScene.height/2, 5, 50)
-            star_graphic.fill(0xFFFFFF)
+        let stroke1 = new PIXI.Graphics()
+            stroke1.rect(-700, 0, 700, 200)
+            stroke1.fill(0xFFFFFF)
 
-        app.stage.addChild(star_graphic)
+        app.stage.addChild(stroke1)
 
-        await Animate.to(star_graphic, {
-            x :300,
-            duration : 1000
+        let stroke2 = new PIXI.Graphics()
+            stroke2.rect(currentScene.width - 200, -700 , 200, 700)
+            stroke2.fill(0xFFFFFF)
+
+        app.stage.addChild(stroke2)
+
+        let stroke3 = new PIXI.Graphics()
+            stroke3.rect(currentScene.width, currentScene.height  , 200, 700)
+            stroke3.fill(0xFFFFFF)
+
+        app.stage.addChild(stroke3)
+
+        await Animate.to(stroke1, {
+              x :700,
+              duration : 1000
         })
 
-        // await Animate.to(star_graphic, {
-        //     scale: {
-        //         x: 100,
-        //         y : 100
-        //     }
-        // })
+        await Animate.to(stroke2, {
+            y : currentScene.width,
+            duration : 1000
+      })
 
-        app.stage.removeChild(star_graphic)
-        app.stage.removeChild(currentScene)
-        app.stage.addChild(nextScene);
+
+        //app.stage.removeChild(stroke1)
+        //app.stage.removeChild(currentScene)
+        //app.stage.addChild(nextScene);
     },
 
     //Slide in a particular direction
