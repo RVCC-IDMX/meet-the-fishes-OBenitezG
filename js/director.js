@@ -90,7 +90,7 @@ var Director = {
         app.stage.addChild(stroke2)
 
         let stroke3 = new PIXI.Graphics()
-            stroke3.rect(currentScene.width, currentScene.height  , 200, 700)
+            stroke3.rect(currentScene.width, currentScene.height - 300  , 700, 300)
             stroke3.fill(0xFFFFFF)
 
         app.stage.addChild(stroke3)
@@ -105,10 +105,17 @@ var Director = {
             duration : 1000
       })
 
+        await Animate.to(stroke3, {
+            x : -700,
+            duration : 1000
+        })
 
-        //app.stage.removeChild(stroke1)
-        //app.stage.removeChild(currentScene)
-        //app.stage.addChild(nextScene);
+
+        app.stage.removeChild(stroke1)
+        app.stage.removeChild(stroke2)
+        app.stage.removeChild(stroke3)
+        app.stage.removeChild(currentScene)
+        app.stage.addChild(nextScene);
     },
 
     //Slide in a particular direction
